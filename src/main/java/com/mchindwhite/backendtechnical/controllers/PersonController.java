@@ -49,14 +49,14 @@ public class PersonController {
 
     //edit a person
     @PutMapping(path = "{personId}")
-    public Person updatePerson(@PathVariable("personId") Long id, @RequestParam(required = false) String name) {
+    public void updatePerson(@PathVariable("personId") Long id, @RequestParam(required = false) String name) {
         Person person = personDao.findById(id).orElseThrow(() -> new IllegalStateException("person with id " + id + " doesn't exist"));
         System.out.println("line 54 " + name);
         if (name != null && name.length() > 0 && !Objects.equals(person.getName(), name)) {
             person.setName(name);
             person.setDateUpdated(LocalDate.now());
         }
-        return personDao.save(person);
+        personDao.save(person);
     }
 
 }
