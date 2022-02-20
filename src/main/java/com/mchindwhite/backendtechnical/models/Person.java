@@ -12,7 +12,9 @@ public class Person {
     private long id;
 
     @Column
-    private String name;
+    private String firstName;
+
+    @Column String lastName;
 
     @Column
     private LocalDate dob;
@@ -29,16 +31,18 @@ public class Person {
     public Person() {
     }
 
-    public Person(long id, String name, LocalDate dob, LocalDate dateJoined, LocalDate dateUpdated) {
+    public Person(long id, String firstName, String lastName, LocalDate dob, LocalDate dateJoined, LocalDate dateUpdated) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dob = dob;
         this.dateJoined = dateJoined;
         this.dateUpdated = dateUpdated;
     }
 
-    public Person(String name, LocalDate dob, LocalDate dateJoined, LocalDate dateUpdated) {
-        this.name = name;
+    public Person(String firstName, String lastName, LocalDate dob, LocalDate dateJoined, LocalDate dateUpdated) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dob = dob;
         this.dateJoined = dateJoined;
         this.dateUpdated = dateUpdated;
@@ -52,12 +56,20 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public LocalDate getDob() {

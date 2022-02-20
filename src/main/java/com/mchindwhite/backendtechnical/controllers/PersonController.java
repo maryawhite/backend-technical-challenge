@@ -29,7 +29,7 @@ public class PersonController {
     //add a new person
     @PostMapping
     public Person registerNewPerson(@RequestBody Person newPerson){
-        Optional<Person> personOptional = personDao.findPersonByName(newPerson.getName());
+        Optional<Person> personOptional = personDao.findPersonByName(newPerson.getFirstName(), newPerson.getLastName());
         if(personOptional.isPresent()){
             throw new IllegalStateException("name already exists");
         }
@@ -49,11 +49,15 @@ public class PersonController {
 
     //edit a person
     @PutMapping(path = "{personId}")
-    public void updatePerson(@PathVariable("personId") Long id, @RequestParam(required = false) String name) {
+    public void updatePerson(@PathVariable("personId") Long id, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName) {
         Person person = personDao.findById(id).orElseThrow(() -> new IllegalStateException("person with id " + id + " doesn't exist"));
-        System.out.println("line 54 " + name);
-        if (name != null && name.length() > 0 && !Objects.equals(person.getName(), name)) {
-            person.setName(name);
+        System.out.println("line 54 " + firstName + " " + lastName);
+        if (firstName != null && firstName.length() > 0 && !Objects.equals(person.getFirstName(), firstName)) {
+            person.setFirstName(firstName);
+            person.setDateUpdated(LocalDate.now());
+        }
+        if (lastName != null && lastName.length() > 0 && !Objects.equals(person.getLastName(), lastName)) {
+            person.setLastName(lastName);
             person.setDateUpdated(LocalDate.now());
         }
         personDao.save(person);
