@@ -4,14 +4,13 @@ import com.mchindwhite.backendtechnical.models.Person;
 import com.mchindwhite.backendtechnical.repositories.PersonRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -44,7 +43,22 @@ public class BackendtechnicalApplicationIntegrationTests {
 			newPerson.setDateUpdated(LocalDate.now());
 			newPerson.setDob(LocalDate.of(1984, 12,18));
 			testPerson = personDao.save(newPerson);
-
 		}
 	}
+
+	@Test
+	public void testIfNotNull(){
+		Assertions.assertNotNull(testPerson);
+	}
+
+	@Test
+	public void testPersonFields(){
+		Person sally = new Person(1L, "sally", "doe", LocalDate.of(1984,12,18), LocalDate.now(), LocalDate.now());
+		Assertions.assertSame(1L, sally.getId());
+		Assertions.assertSame("sally", sally.getFirstName());
+		Assertions.assertSame("doe", sally.getLastName());
+		/* not sure how to write a test for dates, they appear to be 2 different objects */
+//		Assertions.assertSame(LocalDate.of(1984, 12,18), sally.getDob());
+	}
+
 }
