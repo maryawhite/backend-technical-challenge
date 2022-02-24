@@ -15,7 +15,7 @@ public class Person {
     private String firstName;
 
     @Column String lastName;
-
+/**Local Date is a date without a time. You can use it for birthdates, anniversaries, date joined etc. New as of Java 8 */
     @Column
     private LocalDate dob;
 

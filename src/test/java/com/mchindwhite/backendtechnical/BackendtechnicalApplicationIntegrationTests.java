@@ -57,8 +57,8 @@ public class BackendtechnicalApplicationIntegrationTests {
 		Assertions.assertSame(1L, sally.getId());
 		Assertions.assertSame("sally", sally.getFirstName());
 		Assertions.assertSame("doe", sally.getLastName());
-		/* not sure how to write a test for dates, they appear to be 2 different objects */
-//		Assertions.assertSame(LocalDate.of(1984, 12,18), sally.getDob());
+		Assertions.assertEquals(LocalDate.of(1984, 12, 18), sally.getDob());
+		Assertions.assertSame(37, sally.getAge());
 	}
 
 }
