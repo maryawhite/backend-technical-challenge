@@ -3,6 +3,7 @@ package com.mchindwhite.backendtechnical.models;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 @Table
@@ -47,6 +48,14 @@ public class Person {
         this.dateJoined = dateJoined;
         this.dateUpdated = dateUpdated;
     }
+
+    //one person can have many jobs?
+//    @OneToMany(mappedBy = "person")
+//    private List<Job> jobs;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     public long getId() {
         return id;
@@ -102,5 +111,13 @@ public class Person {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 }
